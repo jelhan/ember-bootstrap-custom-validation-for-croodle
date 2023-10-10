@@ -1,0 +1,11 @@
+<BsForm @model={{this.formData}} @onSubmit={{this.submit}} as |form|>
+  <form.element @controlType="email" @property="email" @label="E-Mail" />
+  <form.element
+    @controlType="password"
+    @property="password"
+    @label="Password"
+  />
+  <form.submitButton>
+    Submit
+  </form.submitButton>
+</BsForm>
