@@ -2,6 +2,16 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
+class IntlMessage {
+  key;
+  options;
+
+  constructor(key, options = {}) {
+    this.key = key;
+    this.options = options;
+  }
+}
+
 class FormData {
   @tracked email;
   @tracked password;
@@ -10,18 +20,33 @@ class FormData {
     const { email } = this;
 
     if (!email) {
-      return ['Please provide an email.'];
+      return new IntlMessage('validations.email.valueMissing');
     }
 
     if (!email.includes('@')) {
-      return ['Please provide a valid email.'];
+      return new IntlMessage('validations.email.badInput', {
+        value: this.email,
+      });
     }
 
-    return [];
+    return null;
   }
 
   get passwordValidation() {
-    return [];
+    const { password } = this;
+    const requiredLength = 8;
+
+    if (!password) {
+      return new IntlMessage('validations.password.valueMissing');
+    }
+
+    if (password.length < requiredLength) {
+      return new IntlMessage('validations.password.tooShort', {
+        min: requiredLength,
+      });
+    }
+
+    return null;
   }
 }
 

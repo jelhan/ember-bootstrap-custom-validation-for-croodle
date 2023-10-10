@@ -1,0 +1,7 @@
+validations:
+  email:
+    badInput: "{value} is not a valid email address."
+    valueMissing: "Please provide an email."
+  password:
+    tooShort: "Password must have at least {min} characters."
+    valueMissing: "Please provide a password."
